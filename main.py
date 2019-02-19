@@ -36,8 +36,8 @@ class KBTest(unittest.TestCase):
              solver: solver of the game
         """
         solver.solve()
-
     def runPlayXSteps(self, solver, plays, timeout=5):
+    # def runPlayXSteps(self, solver, plays, timeout=2000):
         """
         Wrapper function; calls playXSteps(..) with a timeout
 
@@ -55,6 +55,7 @@ class KBTest(unittest.TestCase):
             raise Exception("Timed out: %s" % inspect.stack()[1][3])
 
     def runSolve(self, solver, timeout=5):
+    # def runSolve(self, solver, timeout=2000):
         """
         Wrapper function; calls solve(..) with a timeout
 
@@ -85,6 +86,76 @@ class KBTest(unittest.TestCase):
         th.reverseMove(movables[0])
         self.assertEqual(th.getGameState(), ((1,2,3),(),()))
 
+    def test09_GM_Hanoi(self):
+        th = TowerOfHanoiGame()
+        th.read('hanoi_5_all_disks_on_peg_one.txt')
+        required = [
+            'fact: (movable disk1 peg3 peg1)',
+            'fact: (movable disk1 peg3 peg2)',
+        ]
+        th.setWinningCondition(required, 'hanoi_all_forbidden.txt')
+        self.assertFalse(th.isWon())
+
+        movables = th.getMovables()
+        self.assertEqual(th.getGameState(), ((1,2,3,4,5),(),()))
+        th.makeMove(movables[0])
+        self.assertEqual(th.getGameState(), ((2,3,4,5),(1,),()))
+        th.reverseMove(movables[0])
+        self.assertEqual(th.getGameState(), ((1,2,3,4,5),(),()))
+
+    def test10_GM_Hanoi(self):
+        th = TowerOfHanoiGame()
+        th.read('hanoi_5_smallest_on_three_second_smallest_on_two.txt')
+        required = [
+            'fact: (movable disk1 peg1 peg3)',
+            'fact: (movable disk1 peg1 peg2)',
+        ]
+        th.setWinningCondition(required, 'hanoi_all_forbidden.txt')
+        self.assertFalse(th.isWon())
+
+        movables = th.getMovables()
+        self.assertEqual(th.getGameState(), ((3,4,5),(2,),(1,)))
+        th.makeMove(movables[0])
+        self.assertEqual(th.getGameState(), ((1,3,4,5),(2,),()))
+        th.reverseMove(movables[0])
+        self.assertEqual(th.getGameState(), ((3,4,5),(2,),(1,)))
+    
+    def test11_GM_Hanoi(self):
+        th = TowerOfHanoiGame()
+        th.read('hanoi_5_two_smallest_on_peg_three.txt')
+        required = [
+            'fact: (movable disk1 peg1 peg3)',
+            'fact: (movable disk1 peg1 peg2)',
+        ]
+        th.setWinningCondition(required, 'hanoi_all_forbidden.txt')
+        self.assertFalse(th.isWon())
+
+        movables = th.getMovables()
+        self.assertEqual(th.getGameState(), ((3,4,5),(),(1,2)))
+        th.makeMove(movables[0])
+        self.assertEqual(th.getGameState(), ((1,3,4,5),(),(2,)))
+        th.reverseMove(movables[0])
+        self.assertEqual(th.getGameState(), ((3,4,5),(),(1,2)))
+
+    def test12_GM_Hanoi(self):
+        th = TowerOfHanoiGame()
+        th.read('hanoi_3_all_disks_on_peg_one.txt')
+        required = [
+            'fact: (movable disk1 peg3 peg1)',
+            'fact: (movable disk1 peg3 peg2)',
+        ]
+        th.setWinningCondition(required, 'hanoi_all_forbidden.txt')
+        self.assertFalse(th.isWon())
+
+        movables = th.getMovables()
+        self.assertEqual(th.getGameState(), ((1,2,3),(),()))
+        th.makeMove(movables[0])
+        self.assertEqual(th.getGameState(), ((2,3),(1,),()))
+        movables = th.getMovables()
+        th.makeMove(movables[2])
+        self.assertEqual(th.getGameState(), ((3,),(1,),(2,)))
+        movables = th.getMovables()
+
     def test02_DFS_Hanoi(self):
         th = TowerOfHanoiGame()
         th.read('hanoi_3_all_disks_on_peg_one.txt')
@@ -99,9 +170,9 @@ class KBTest(unittest.TestCase):
 
         self.runPlayXSteps(solver, [
             # [step, expected game state]
-            [3, ((1, 3), (), (2,))],
-            [13, ((2,), (), (1, 3))],
-            [22, ((2,), (1, 3), ())],
+            [3, ((3,), (2,), (1,))],
+            [13, ((1,), (), (2, 3))],
+            [22, ((), (), (1, 2, 3))],
         ])
 
     def test03_DFS_Hanoi(self):
@@ -131,9 +202,9 @@ class KBTest(unittest.TestCase):
 
         self.runPlayXSteps(solver, [
             # [step, expected game state]
-            [10, ((), (1,2), (3,))],
+            [10, ((), (1, 2), (3,))],
             [11, ((1,), (3,), (2,))],
-            [20, ((), (1,2,3), ())],
+            [20, ((), (2, 3), (1,))],
         ])
 
     def test05_BFS_Hanoi(self):
@@ -162,7 +233,7 @@ class KBTest(unittest.TestCase):
         movables = p8.getMovables()
         self.assertEqual(p8.getGameState(), ((5,4,-1),(6,1,8),(7,3,2)))
         p8.makeMove(movables[0])
-        self.assertEqual(p8.getGameState(), ((5,4,8),(6,1,-1),(7,3,2)))
+        self.assertEqual(p8.getGameState(), ((5,-1,4), (6,1,8), (7,3,2)))
         p8.reverseMove(movables[0])
         self.assertEqual(p8.getGameState(), ((5,4,-1),(6,1,8),(7,3,2)))
 
@@ -181,9 +252,9 @@ class KBTest(unittest.TestCase):
 
         self.runPlayXSteps(solver, [
             # [step, expected game state]
-            [9, ((4, 8, 1), (5, 3, -1), (6, 7, 2))],
-            [17, ((8, 1, 2), (4, 3, -1), (5, 6, 7))],
-            [34, ((2, 7, 6), (1, 3, 5), (8, 4, -1))],
+            [9, ((5, 4, 3), (6, 1, -1), (7, 2, 8))],
+            [17, ((5, -1, 4), (2, 1, 3), (6, 7, 8))],
+            [34, ((5, 4, -1), (3, 2, 1), (6, 7, 8))],
         ])
 
     def test08_BFS_8Puzzle(self):
@@ -200,9 +271,9 @@ class KBTest(unittest.TestCase):
 
         self.runPlayXSteps(solver, [
             # [step, expected game state]
-            [5, ((-1, 5, 4), (6, 1, 8), (7, 3, 2))],
-            [13, ((5, 1, 4), (6, 8, -1), (7, 3, 2))],
-            [21, ((5, 4, 8), (6, 1, 2), (-1, 7, 3))],
+            [5, ((5, 4, 8), (6, -1, 1), (7, 3, 2))],
+            [13, ((5, 4, 8), (-1, 6, 1), (7, 3, 2))],
+            [21, ((6, 5, 4), (1, -1, 8), (7, 3, 2))],
         ])
 
 
