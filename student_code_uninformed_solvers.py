@@ -130,6 +130,9 @@ class SolverBFS(UninformedSolver):
             True if the desired solution state is reached, False otherwise
         """
         ### Student code goes here
+        if self.gm.getGameState() == self.victoryCondition:
+            return True
+
         if self.queue.isEmpty():
             possibleMoves = self.gm.getMovables()
             for move in possibleMoves:
