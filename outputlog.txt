@@ -1,0 +1,106 @@
+TESTS WITH ERRORS 
+-------------------------------
+TESTS FAILED  
+test06_GM_8Puzzle_02 (gradingtests.UnitTests)
+Traceback (most recent call last):
+  File "C:\Users\kille\academics\automatedgradingapp\app\testing\uninformed-solvers\gradingtests.py", line 149, in test06_GM_8Puzzle_02
+    self.assertEqual(p8.getGameState(), ((1,2,3,),(8,-1,4),(7,6,5)))
+AssertionError: Tuples differ: ((1, 2, 3), (8, 6, 4), (7, -1, 5)) != ((1, 2, 3), (8, -1, 4), (7, 6, 5))
+
+First differing element 1:
+(8, 6, 4)
+(8, -1, 4)
+
+- ((1, 2, 3), (8, 6, 4), (7, -1, 5))
+?                 ^          ^^
+
++ ((1, 2, 3), (8, -1, 4), (7, 6, 5))
+?                 ^^          ^
+
+
+test07_GM_8Puzzle_03 (gradingtests.UnitTests)
+Traceback (most recent call last):
+  File "C:\Users\kille\academics\automatedgradingapp\app\testing\uninformed-solvers\gradingtests.py", line 175, in test07_GM_8Puzzle_03
+    self.assertEqual(p8.getGameState(), ((5,1,4), (6,-1,8), (7,3,2)))
+AssertionError: Tuples differ: ((5, 4, -1), (6, 1, 8), (7, 3, 2)) != ((5, 1, 4), (6, -1, 8), (7, 3, 2))
+
+First differing element 0:
+(5, 4, -1)
+(5, 1, 4)
+
+- ((5, 4, -1), (6, 1, 8), (7, 3, 2))
+?       ----
+
++ ((5, 1, 4), (6, -1, 8), (7, 3, 2))
+?      +++        +
+
+
+test08_GM_8Puzzle_04 (gradingtests.UnitTests)
+Traceback (most recent call last):
+  File "C:\Users\kille\academics\automatedgradingapp\app\testing\uninformed-solvers\gradingtests.py", line 195, in test08_GM_8Puzzle_04
+    self.assertEqual(p8.getGameState(), ((1,2,3,),(8,-1,4),(7,6,5)))
+AssertionError: Tuples differ: ((1, 2, 3), (8, 6, 4), (7, -1, 5)) != ((1, 2, 3), (8, -1, 4), (7, 6, 5))
+
+First differing element 1:
+(8, 6, 4)
+(8, -1, 4)
+
+- ((1, 2, 3), (8, 6, 4), (7, -1, 5))
+?                 ^          ^^
+
++ ((1, 2, 3), (8, -1, 4), (7, 6, 5))
+?                 ^^          ^
+
+
+test16_DFS_8Puzzle_02 (gradingtests.UnitTests)
+Traceback (most recent call last):
+  File "C:\Users\kille\academics\automatedgradingapp\app\testing\uninformed-solvers\gradingtests.py", line 352, in test16_DFS_8Puzzle_02
+    [30, ((8, 1, -1), (7, 2, 3), (6, 5, 4))],
+  File "C:\Users\kille\academics\automatedgradingapp\app\testing\uninformed-solvers\gradingtests.py", line 55, in runPlayXSteps
+    self.assertEqual(results[index], expected)
+AssertionError: Tuples differ: ((8, 6, 3), (1, 2, 4), (7, -1, 5)) != ((8, 3, 4), (7, -1, 1), (6, 2, 5))
+
+First differing element 0:
+(8, 6, 3)
+(8, 3, 4)
+
+- ((8, 6, 3), (1, 2, 4), (7, -1, 5))
++ ((8, 3, 4), (7, -1, 1), (6, 2, 5))
+
+test17_DFS_8Puzzle_03 (gradingtests.UnitTests)
+Traceback (most recent call last):
+  File "C:\Users\kille\academics\automatedgradingapp\app\testing\uninformed-solvers\gradingtests.py", line 371, in test17_DFS_8Puzzle_03
+    [8, ((8, 3, 4), (2, -1, 1), (7, 6, 5))],
+  File "C:\Users\kille\academics\automatedgradingapp\app\testing\uninformed-solvers\gradingtests.py", line 55, in runPlayXSteps
+    self.assertEqual(results[index], expected)
+AssertionError: Tuples differ: ((1, -1, 3), (8, 2, 4), (7, -1, 5)) != ((8, 1, 3), (-1, 2, 4), (7, 6, 5))
+
+First differing element 0:
+(1, -1, 3)
+(8, 1, 3)
+
+- ((1, -1, 3), (8, 2, 4), (7, -1, 5))
++ ((8, 1, 3), (-1, 2, 4), (7, 6, 5))
+
+test20_BFS_8Puzzle_03 (gradingtests.UnitTests)
+Traceback (most recent call last):
+  File "C:\Users\kille\academics\automatedgradingapp\app\testing\uninformed-solvers\gradingtests.py", line 428, in test20_BFS_8Puzzle_03
+    [7, ((1, 2, -1), (8, 4, 3), (7, 6, 5))],
+  File "C:\Users\kille\academics\automatedgradingapp\app\testing\uninformed-solvers\gradingtests.py", line 55, in runPlayXSteps
+    self.assertEqual(results[index], expected)
+AssertionError: Tuples differ: ((1, 3, -1), (8, 6, 4), (7, -1, 5)) != ((-1, 1, 3), (8, 2, 4), (7, 6, 5))
+
+First differing element 0:
+(1, 3, -1)
+(-1, 1, 3)
+
+- ((1, 3, -1), (8, 6, 4), (7, -1, 5))
+?       ----       ^          ^^
+
++ ((-1, 1, 3), (8, 2, 4), (7, 6, 5))
+?   +   +++        ^          ^
+
+
+-------------------------------
+TESTS SKIPPED 
+-------------------------------
